@@ -20,8 +20,13 @@ public class Queue<T> {
 	private QueueNode<T> first;
 	private QueueNode<T> last;
 	
-	public void add(T item) {
-		QueueNode<T> newNode = new QueueNode<T>(item);
+	/**
+	 *  From:	First -> ... -> Last
+	 *  To:		First -> ... -> Last -> newItem
+	 * @param newItem
+	 */
+	public void add(T newItem) {
+		QueueNode<T> newNode = new QueueNode<T>(newItem);
 		if (last != null) {
 			last.next = newNode;
 		}
@@ -31,6 +36,12 @@ public class Queue<T> {
 		}
 	}
 	
+	/**
+	 * From:	First -> next -> ... -> Last
+	 * To:		next -> ... -> last
+	 * Also called dequeue
+	 * @return the element after the first node
+	 */
 	public T remove() {
 		if (first == null) throw new NoSuchElementException();
 		T data = first.data;
@@ -41,6 +52,10 @@ public class Queue<T> {
 		return data;
 	}
 	
+	/**
+	 * 
+	 * @return First element
+	 */
 	public T peek() {
 		if (first == null) throw new NoSuchElementException();
 		return first.data;
