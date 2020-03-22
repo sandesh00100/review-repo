@@ -1,8 +1,8 @@
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class GraphListImplTest {
-    static GraphListImpl graph;
+public class GraphListTest {
+    static GraphList graph;
 
     /**
      *          1      4
@@ -15,7 +15,7 @@ public class GraphListImplTest {
      */
     @BeforeAll
     public static void setUp(){
-        graph = new GraphListImpl();
+        graph = new GraphList();
         graph.addEdgeBiDirectional(0,1);
         graph.addEdgeBiDirectional(0,2);
         graph.addEdgeBiDirectional(2,3);

@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class GraphListImpl implements Graph {
+public class GraphList implements Graph {
     private HashMap<Integer, GraphNode> nodeLookup = new HashMap<Integer, GraphNode>();
 
     @Override

@@ -2,6 +2,7 @@ import java.util.NoSuchElementException;
 
 /**
  * First in first out data structure
+ * TODO: Create a priority queue
  * @author Sandesh
  *
  */
