@@ -1,0 +1,4 @@
+rootProject.name = 'Review'
+include 'AlgoProblems'
+include 'DataStructures'
+
