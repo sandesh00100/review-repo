@@ -43,4 +43,16 @@ public class ArrayProblemsTest {
         assert(!arrayProblems.palindromePermutation("TactbCoa"));
         assert(arrayProblems.palindromePermutation("a"));
     }
+
+    @Test
+    public void oneWayTest(){
+        assert(arrayProblems.oneAway("abcd","abc"));
+        assert(arrayProblems.oneAway("abcd","ebcd"));
+        assert(arrayProblems.oneAway("abcd","abcdd"));
+    }
+
+    @Test
+    public void compressedStringTest(){
+        assert(arrayProblems.stringCompression("aaabccdddd").equals("a3b1c2d4"));
+    }
 }

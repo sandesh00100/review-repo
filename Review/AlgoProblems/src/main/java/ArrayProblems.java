@@ -113,4 +113,74 @@ public class ArrayProblems {
         }
         return false;
     }
+
+    public boolean oneAway(String s1, String s2){
+        char[] c1Array = s1.toCharArray();
+        char[] c2Array = s2.toCharArray();
+
+        boolean foundDifference = false;
+        if (c1Array.length == c2Array.length){
+            for (int i = 0; i < s1.length(); i++){
+                if (c1Array[i] != c2Array[i]){
+                    if (!foundDifference){
+                        foundDifference = true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        } else if ((Math.abs(c1Array.length - c2Array.length)) == 1){
+            char[] shorterArr = c1Array.length >  c2Array.length ? c2Array : c1Array;
+            char[] longerArr = c1Array.length <  c2Array.length ? c2Array : c1Array;
+            boolean skippedDifference = false;
+            int longerArrIndex = 0;
+            for (int i=0; i<shorterArr.length; i++){
+                if (shorterArr[i] != longerArr[longerArrIndex]){
+                    if (!skippedDifference) {
+                        longerArrIndex++;
+                        skippedDifference = true;
+                        if (shorterArr[i] != longerArr[longerArrIndex]){
+                            return false;
+                        }
+                    } else {
+                        return false;
+                    }
+                }
+                longerArrIndex++;
+            }
+        } else {
+            return false;
+        }
+        return true;
+    }
+
+    public String stringCompression(String s){
+        char[] cArray = s.toCharArray();
+        StringBuilder sb = new StringBuilder();
+        char prevChar = cArray[0];
+        int count = 1;
+        for (int i = 1; i < cArray.length; i++){
+            char currentChar = cArray[i];
+            if (currentChar == prevChar) {
+                count++;
+            } else {
+                sb.append(prevChar+String.valueOf(count));
+                prevChar = currentChar;
+                count = 1;
+                if (sb.length() > s.length()){
+                    return s;
+                }
+            }
+
+            if (i == cArray.length - 1) {
+                sb.append(prevChar+String.valueOf(count));
+                prevChar = currentChar;
+                count = 1;
+                if (sb.length() > s.length()){
+                    return s;
+                }
+            }
+        }
+        return sb.toString();
+    }
 }
