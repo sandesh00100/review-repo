@@ -54,5 +54,6 @@ public class ArrayProblemsTest {
     @Test
     public void compressedStringTest(){
         assert(arrayProblems.stringCompression("aaabccdddd").equals("a3b1c2d4"));
+        assert(arrayProblems.stringCompression("abcde").equals("abcde"));
     }
 }

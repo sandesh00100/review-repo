@@ -183,4 +183,31 @@ public class ArrayProblems {
         }
         return sb.toString();
     }
+
+    /**
+     * Ex input
+     * [1,2,3,4],
+     * [5,6,7,8],
+     * [9,10,11,12]
+     *
+     * Ex output
+     * [4,8,12],
+     * [3,7,11],
+     * [2,6,10],
+     * [1,5,9]
+     *
+     * @param inputMatrix
+     * @return
+     */
+    public int[][] rotateMatrix(int[][] inputMatrix){
+        int m = inputMatrix[0].length;
+        int n = inputMatrix.length;
+        int [][] rotatedMatrix = new int[m][n];
+        for (int i=0; i<m; i++){
+            for(int j=0; j<n; j++){
+                rotatedMatrix[n-j-1][i] = inputMatrix[i][j];
+            }
+        }
+        return rotatedMatrix;
+    }
 }
