@@ -200,9 +200,10 @@ public class ArrayProblems {
      * @return
      */
     public int[][] rotateMatrix(int[][] inputMatrix){
-        int m = inputMatrix[0].length;
-        int n = inputMatrix.length;
-        int [][] rotatedMatrix = new int[m][n];
+        int m = inputMatrix.length;
+        int n = inputMatrix[0].length;
+
+        int [][] rotatedMatrix = new int[n][m];
         for (int i=0; i<m; i++){
             for(int j=0; j<n; j++){
                 rotatedMatrix[n-j-1][i] = inputMatrix[i][j];
