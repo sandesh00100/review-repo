@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class LinkedListProblems {
     public void removeDups(LinkedListNode<Integer> Head){
@@ -15,6 +17,26 @@ public class LinkedListProblems {
                 currentNode = compareNode;
             }
         }
+    }
+
+    public int returnKthToLast(LinkedListNode<Integer> node, int k){
+        ArrayList<Integer> elementList = new ArrayList<Integer>();
+
+        while (node != null) {
+            elementList.add(node.data);
+            node = node.next;
+        }
+
+        return elementList.get(elementList.size()-k+1);
+    }
+
+    public void deleteMiddleNode(LinkedListNode<Integer> nodeToDelete){
+        nodeToDelete.data = nodeToDelete.next.data;
+        nodeToDelete.next = nodeToDelete.next.next;
+    }
+
+    public LinkedListNode<Integer> partition(LinkedList<Integer> node, int partition) {
+
     }
 
     public LinkedListNode<Integer> generateLinkedListWithArray(int[] values) {
