@@ -35,9 +35,10 @@ public class LinkedListProblems {
         nodeToDelete.next = nodeToDelete.next.next;
     }
 
-    public LinkedListNode<Integer> partition(LinkedList<Integer> node, int partition) {
-
-    }
+    // need to revist
+//    public LinkedListNode<Integer> partition(LinkedList<Integer> node, int partition) {
+//
+//    }
 
     public LinkedListNode<Integer> generateLinkedListWithArray(int[] values) {
         LinkedListNode<Integer> currentNode = new LinkedListNode<>(values[0]);
@@ -47,6 +48,34 @@ public class LinkedListProblems {
             currentNode = currentNode.next;
         }
         return head;
+    }
+
+    public LinkedListNode<Integer> sumLists(LinkedListNode<Integer> list1Node, LinkedListNode<Integer> list2Node) {
+        LinkedListNode<Integer> currentSumNode = null;
+        int carryOver = 0;
+        while (list1Node != null && list2Node != null) {
+            if (currentSumNode == null) {
+                currentSumNode = new LinkedListNode<>(list1Node.data + list2Node.data);
+            } else {
+                int sum = list1Node.data + list2Node.data + carryOver;
+                carryOver = sum/10;
+                LinkedListNode<Integer> nextNode = new LinkedListNode<>(sum % 10);
+                currentSumNode.next = nextNode;
+                currentSumNode = currentSumNode.next;
+            }
+            list1Node = list2Node.next;
+            list2Node = list2Node.next;
+        }
+
+        LinkedListNode<Integer> unfinishedNode = list1Node != null ? list1Node : list2Node;
+
+        while (unfinishedNode != null) {
+            currentSumNode.next = new LinkedListNode<>(unfinishedNode.data);
+            currentSumNode = currentSumNode.next;
+            unfinishedNode = unfinishedNode.next;
+        }
+
+        return currentSumNode;
     }
 
     public void printLinkedList(LinkedListNode<Integer> node){
