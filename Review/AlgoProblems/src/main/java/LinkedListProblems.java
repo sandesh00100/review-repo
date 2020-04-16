@@ -52,30 +52,34 @@ public class LinkedListProblems {
 
     public LinkedListNode<Integer> sumLists(LinkedListNode<Integer> list1Node, LinkedListNode<Integer> list2Node) {
         LinkedListNode<Integer> currentSumNode = null;
+        LinkedListNode<Integer> sumHead = null;
         int carryOver = 0;
+
         while (list1Node != null && list2Node != null) {
+            int sum = list1Node.data + list2Node.data + carryOver;
+            carryOver = sum/10;
+            LinkedListNode<Integer> nextNode = new LinkedListNode<>(sum % 10);
             if (currentSumNode == null) {
-                currentSumNode = new LinkedListNode<>(list1Node.data + list2Node.data);
+                currentSumNode = sumHead = nextNode;
             } else {
-                int sum = list1Node.data + list2Node.data + carryOver;
-                carryOver = sum/10;
-                LinkedListNode<Integer> nextNode = new LinkedListNode<>(sum % 10);
                 currentSumNode.next = nextNode;
                 currentSumNode = currentSumNode.next;
             }
-            list1Node = list2Node.next;
+            list1Node = list1Node.next;
             list2Node = list2Node.next;
         }
 
         LinkedListNode<Integer> unfinishedNode = list1Node != null ? list1Node : list2Node;
 
         while (unfinishedNode != null) {
-            currentSumNode.next = new LinkedListNode<>(unfinishedNode.data);
+            int sum = carryOver + unfinishedNode.data;
+            carryOver = sum/10;
+            currentSumNode.next = new LinkedListNode<>(sum%10);
             currentSumNode = currentSumNode.next;
             unfinishedNode = unfinishedNode.next;
         }
 
-        return currentSumNode;
+        return sumHead;
     }
 
     public void printLinkedList(LinkedListNode<Integer> node){
@@ -85,5 +89,6 @@ public class LinkedListProblems {
             System.out.print("=>" + node.data);
             node = node.next;
         }
+        System.out.println();
     }
 }
