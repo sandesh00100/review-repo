@@ -82,6 +82,10 @@ public class LinkedListProblems {
         return sumHead;
     }
 
+//    public boolean isPalindrome(LinkedListNode<Integer> linkedListNode){
+//        Stack<Integer> stack = new Stack<>();
+//
+//    }
     public void printLinkedList(LinkedListNode<Integer> node){
         System.out.print(node.data);
         node = node.next;

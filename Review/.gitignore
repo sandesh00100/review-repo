@@ -1,0 +1,8 @@
+.metadata
+.idea
+.project
+.classpath
+.settings
+*.iml
+.gradle
+./build
