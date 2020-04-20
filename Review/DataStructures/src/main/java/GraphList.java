@@ -39,7 +39,7 @@ public class GraphList implements Graph {
     public boolean hasPathDfsWithStack(int source, int destination){
         GraphNode s = nodeLookup.get(source);
         GraphNode d = nodeLookup.get(destination);
-        Stack<GraphNode> nodes = new Stack<GraphNode>();
+        StackWithList<GraphNode> nodes = new StackWithList<GraphNode>();
         Set<GraphNode> visitedNodes = new HashSet<GraphNode>();
         nodes.push(s);
         visitedNodes.add(s);
@@ -69,21 +69,21 @@ public class GraphList implements Graph {
     public boolean hasPathBfsWithQueue(int source, int destination){
         GraphNode s = nodeLookup.get(source);
         GraphNode d = nodeLookup.get(destination);
-        Queue<GraphNode> nodes = new Queue<GraphNode>();
+        QueueWithList<GraphNode> nodes = new QueueWithList<GraphNode>();
         Set<GraphNode> visitedNodes = new HashSet<GraphNode>();
-        nodes.add(s);
+        nodes.enqueue(s);
         visitedNodes.add(s);
         System.out.println("Visiting:" + s.id);
 
         while (!nodes.isEmpty()) {
-            GraphNode currentNode = nodes.remove();
+            GraphNode currentNode = nodes.dequeue();
             if (currentNode.equals(d)){
                 return true;
             }
             visitedNodes.add(currentNode);
             for(GraphNode adjNode: currentNode.adjacentNodes) {
                 if (!visitedNodes.contains(adjNode)) {
-                    nodes.add(adjNode);
+                    nodes.enqueue(adjNode);
                     visitedNodes.add(adjNode);
                     System.out.println("Visiting:" + adjNode.id);
                 }

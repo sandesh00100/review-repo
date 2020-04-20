@@ -1,6 +1,11 @@
 import java.util.EmptyStackException;
 
-public class Stack<T> {
+/**
+ * Every operation takes constant time in the worst case
+ * Uses extra time and space to deal with links
+ * @param <T>
+ */
+public class StackWithList<T> implements Stack<T>{
 	private static class StackNode<T> {
 		private T data;
 		private StackNode<T> next;
@@ -18,6 +23,7 @@ public class Stack<T> {
 	 *  To: Next -> ... -> Bottom
 	 * @return Top of the stack
 	 */
+	@Override
 	public T pop() {
 		// Stack is empty throw exception
 		if (top == null) throw new EmptyStackException();
@@ -31,6 +37,7 @@ public class Stack<T> {
 	 * To: newItem -> OldTop -> Next -> ... -> Bottom
 	 * @param newItem
 	 */
+	@Override
 	public void push(T newItem) {
 		StackNode<T> newNode = new StackNode<T>(newItem);
 		newNode.next = top;
@@ -41,6 +48,7 @@ public class Stack<T> {
 	 * 
 	 * @return Top of the stack
 	 */
+	@Override
 	public T peek() {
 		if (top == null) throw new EmptyStackException();
 		return top.data;
@@ -50,6 +58,7 @@ public class Stack<T> {
 	 * Checks if stack is empty
 	 * @return
 	 */
+	@Override
 	public boolean isEmpty() {
 		return top == null;
 	}
