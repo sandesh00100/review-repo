@@ -1,22 +1,15 @@
 import java.util.EmptyStackException;
+import java.util.Iterator;
 
 /**
  * Every operation takes constant time in the worst case
  * Uses extra time and space to deal with links
  * @param <T>
  */
-public class StackWithList<T> implements Stack<T>{
-	private static class StackNode<T> {
-		private T data;
-		private StackNode<T> next;
-		
-		public StackNode(T data) {
-			this.data = data;
-		}
-	}
+public class StackWithList<T> implements Stack<T>, Iterable<T>{
 	
 	// Top -> .. -> .. -> Bottom
-	private StackNode<T> top;
+	private LinkedListNode<T> top;
 	
 	/**
 	 *  From: Top -> Next -> ... -> Bottom
@@ -39,7 +32,7 @@ public class StackWithList<T> implements Stack<T>{
 	 */
 	@Override
 	public void push(T newItem) {
-		StackNode<T> newNode = new StackNode<T>(newItem);
+		LinkedListNode<T> newNode = new LinkedListNode<T>(newItem);
 		newNode.next = top;
 		top = newNode;
 	}
@@ -61,5 +54,10 @@ public class StackWithList<T> implements Stack<T>{
 	@Override
 	public boolean isEmpty() {
 		return top == null;
+	}
+
+	@Override
+	public Iterator<T> iterator() {
+		return new ListIterator<>(top);
 	}
 }

@@ -1,3 +1,5 @@
+import java.util.Iterator;
+
 /**
  * Less wasted space than the linked list implementation
  *
@@ -8,7 +10,7 @@
  * Size         1       1       1
  * @param <T>
  */
-public class StackWithArray<T> implements Stack<T> {
+public class StackWithArray<T> implements Stack<T>, Iterable<T>{
     private T[] stack;
     private int nextHeadIndex = 0;
     private final int START_CAPACITY = 10;
@@ -54,5 +56,10 @@ public class StackWithArray<T> implements Stack<T> {
             copy[i]=stack[i];
         }
         stack=copy;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new ArrayIterator<>(stack);
     }
 }

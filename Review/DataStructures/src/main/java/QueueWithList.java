@@ -1,4 +1,5 @@
-import java.util.NoSuchElementException;
+import java.util.*;
+import java.util.function.Consumer;
 
 /**
  * First in first out data structure
@@ -6,18 +7,14 @@ import java.util.NoSuchElementException;
  * @author Sandesh
  *
  */
-public class QueueWithList<T> implements Queue<T>{
-	private static class QueueNode<T> {
-		private T data;
-		private QueueNode<T> next;
-		
-		public QueueNode(T data) {
-			this.data = data;
-		}
+public class QueueWithList<T> implements Queue<T>, Iterable<T>{
+	@Override
+	public Iterator<T> iterator(){
+		return new ListIterator(first);
 	}
 	
-	private QueueNode<T> first;
-	private QueueNode<T> last;
+	private LinkedListNode<T> first;
+	private LinkedListNode<T> last;
 	
 	/**
 	 *  From:	First -> ... -> Last
@@ -26,7 +23,7 @@ public class QueueWithList<T> implements Queue<T>{
 	 */
 	@Override
 	public void enqueue(T newItem) {
-		QueueNode<T> newNode = new QueueNode<T>(newItem);
+		LinkedListNode<T> newNode = new LinkedListNode<T>(newItem);
 		if (last != null) {
 			last.next = newNode;
 		}
