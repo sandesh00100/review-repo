@@ -7,7 +7,7 @@ public class MergeSortInplace {
      * @param mid
      * @param hi
      */
-    //TODO: Use Comprables instead
+    //TODO: Go over stability and comparators
     private static void merge(int[] a, int[] aux, int lo, int mid, int hi) {
 //        assert isSorted(a, lo, mid);
 //        assert isSorted(a, mid+1, hi);
@@ -25,7 +25,7 @@ public class MergeSortInplace {
                 a[k] = aux[j++];
             } else {
                 a[k]= aux[i] < aux[j] ? aux[i++] : aux[j++];
-            }
+        }
         }
 //        assert isSorted(a, lo, hi);
     }

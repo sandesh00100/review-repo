@@ -23,9 +23,9 @@ public class MergeSortBottomUp {
     public static void sort(int[] a){
         int arrayFullSize = a.length;
         int[] aux = new int[arrayFullSize];
-        for (int sz =1; sz < arrayFullSize; sz = sz*2) {
-            for(int lo = 0; lo < arrayFullSize-sz; lo += sz*2){
-                merge(a, aux, lo, lo+sz-1, Math.min(lo+(sz*2),arrayFullSize-1));
+        for (int sz =1; sz < arrayFullSize; sz = sz + sz) {
+            for(int lo = 0; lo < arrayFullSize-sz; lo += sz + sz){
+                merge(a, aux, lo, lo+sz-1, Math.min(lo+sz+sz-1,arrayFullSize-1));
             }
         }
     }
