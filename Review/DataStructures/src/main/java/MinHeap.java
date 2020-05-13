@@ -20,6 +20,14 @@ public class MinHeap {
 
 	int[] items = new int[capacity];
 
+	public MinHeap(int[] a) {
+		// Heapify
+		for(int i = a.length/2; i>0; i--){
+			heapifyDown(i,a);
+		}
+
+	}
+
 	private int getLeftChildIndex(int parentIndex) {
 		return 2 * parentIndex + 1;
 	};
@@ -91,12 +99,12 @@ public class MinHeap {
 		int item = items[0];
 		items[0] = items[size - 1];
 		size--;
-		heapifyDown();
+		items[size-1] = item;
+		heapifyDown(0, this.items);
 		return item;
 	}
 	
-	private void heapifyDown() {
-		int index = 0;
+	private void heapifyDown(int index, int[] items) {
 		// If it doesn't have a left child then it wont have a right with how it's ordered
 		while (hasLeftChild(index)) {
 			int smallerChildIndex = getLeftChildIndex(index);
@@ -133,7 +141,12 @@ public class MinHeap {
 			index = parentIndex;
 		}
 	}
-	
-	
+
+	public int[] sort() {
+		while(size>0){
+			poll();
+		}
+		return this.items;
+	}
 	
 }
