@@ -13,17 +13,37 @@ import java.util.Arrays;
  * From left to right and it's always a complete binary tree (every thing is filled except maybe the last row which is filled from left to right)
  * @author Sandesh
  *
+ * Heapsort
+ * Heap Construction uses <= 2N compares and exchanges
+ * Heapsort uses<= 2NlogN compares and exchange
+ *
+ *
+ * Mergesort: takes linear extra space
+ * quicksort: qudratic time worst case senario
+ * heapsort: inplace NlogN worst case
+ *
+ * Heap sort is optimal for both time and space
+ * but
+ * 	the inner loop takes longer than quicksorts
+ * 	makes poor use of cache memory
+ * 	not stable
  */
 public class MinHeap {
-	private int capacity = 10;
+	private int capacity = 3;
 	private int size = 0;
 
 	int[] items = new int[capacity];
 
 	public MinHeap(int[] a) {
 		// Heapify
-		for(int i = a.length/2; i>0; i--){
-			heapifyDown(i,a);
+		this.size = a.length;
+		ensureExtraCapicity();
+		for (int i=0; i < this.size; i++){
+			items[i] = a[i];
+		}
+
+		for(int i = (size-1)/2; i >= 0; i--){
+			heapifyDown(i);
 		}
 
 	}
@@ -75,7 +95,7 @@ public class MinHeap {
 	 * If it's full then double the capacity of the array. Basically how an array list operates.
 	 */
 	private void ensureExtraCapicity() {
-		if (size == capacity) {
+		while(size >= capacity) {
 			items = Arrays.copyOf(items, capacity * 2);
 			capacity *= 2;
 		}
@@ -99,17 +119,17 @@ public class MinHeap {
 		int item = items[0];
 		items[0] = items[size - 1];
 		size--;
-		items[size-1] = item;
-		heapifyDown(0, this.items);
+		items[size] = item;
+		heapifyDown(0);
 		return item;
 	}
 	
-	private void heapifyDown(int index, int[] items) {
+	private void heapifyDown(int index) {
 		// If it doesn't have a left child then it wont have a right with how it's ordered
 		while (hasLeftChild(index)) {
 			int smallerChildIndex = getLeftChildIndex(index);
 			if (hasRightChild(index) && rightChild(index) < leftChild(index)) {
-				smallerChildIndex = rightChild(index);
+				smallerChildIndex = getRightChildIndex(index);
 			}
 			
 			// If the smaller child is already greater than the current node then exit
