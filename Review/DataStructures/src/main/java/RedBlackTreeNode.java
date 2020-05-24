@@ -18,39 +18,30 @@ enum Color {
     RED,
     BLACK
 }
-public class RedBlackTree {
-    private static class RedBlackTreeNode {
-        int value;
-        private RedBlackTreeNode rightNode;
-        private RedBlackTreeNode leftNode;
-        Color color;
+public class RedBlackTreeNode {
+    int value;
+    private RedBlackTreeNode rightNode;
+    private RedBlackTreeNode leftNode;
+    Color color;
 
-        public RedBlackTreeNode(int value, Color color){
-           this.value = value;
-           this.color = color;
-        }
-
-        private Color isRed(RedBlackTreeNode node){
-            // All null links are black
-           if (node == null) return Color.BLACK;
-           return node.color;
-        }
+    public RedBlackTreeNode(int value, Color color){
+        this.value = value;
+        this.color = color;
     }
 
-    RedBlackTreeNode root;
-    public RedBlackTree(int rootValue){
-        this.root = new RedBlackTreeNode(rootValue, Color.BLACK);
+    private boolean isRed(RedBlackTreeNode node){
+        // All null links are black
+        if (node == null) return false;
+        return node.color == Color.RED;
     }
-
-    public boolean contains(int val){
-        RedBlackTreeNode currentNode = root;
-        while (currentNode != null){
-            if (currentNode.value == val) {
+    public boolean contains(RedBlackTreeNode node, int val){
+        while (node != null){
+            if (node.value == val) {
                 return true;
-            } else if (currentNode.value > val){
-                currentNode = currentNode.leftNode;
+            } else if (node.value > val){
+                node = node.leftNode;
             } else {
-                currentNode = currentNode.rightNode;
+                node = node.rightNode;
             }
         }
         return false;
@@ -94,5 +85,16 @@ public class RedBlackTree {
         node.color = Color.RED;
         node.leftNode.color = Color.BLACK;
         node.rightNode.color = Color.BLACK;
+    }
+
+    private RedBlackTreeNode put(RedBlackTreeNode node, int val ){
+        if (node == null) return new RedBlackTreeNode(val, Color.RED);
+        else if (node.value > val) node.leftNode = put(node.leftNode, val);
+        else if (node.value < val) node.rightNode = put(node.rightNode, val);
+        else node.value = val;
+        if (isRed(node.rightNode) && !isRed(node.leftNode)) node = rotateLeft(node);
+        if (isRed(node.leftNode) && isRed(node.leftNode.leftNode)) node = rotateRight(node);
+        if (isRed(node.leftNode) && isRed(node.rightNode)) flipColors(node);
+        return node;
     }
 }

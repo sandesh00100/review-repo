@@ -96,6 +96,7 @@ public class MinHeap {
 	 */
 	private void ensureExtraCapicity() {
 		while(size >= capacity) {
+			capacity = size;
 			items = Arrays.copyOf(items, capacity * 2);
 			capacity *= 2;
 		}
