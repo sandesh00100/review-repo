@@ -1,6 +1,19 @@
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Typical HashCode Method
+ *  public int hashCode(){
+ *      int hash = 17;  (non-zero-constant)
+ *      hash = 31*hash + memberVar1.hashCode(); (31 is the typical prime we use to hash)
+ *      hash = 31*hash + memberVar2.hashCode(); (Similar to horners method where we compute a new hash for each element)
+ *      ...
+ *      return hash;
+ *  }
+ * @param <K>
+ * @param <V>
+ */
 public class HashTable<K, V> {
 	private static class HashNode<K,V> {
 		K key;
@@ -83,7 +96,7 @@ public class HashTable<K, V> {
 			if (currentNode.key.equals(key)) {
 				currentNode.value = value;
 				keyExists = true;
-				break;
+				return;
 			}
 			currentNode = currentNode.next;
 		}
