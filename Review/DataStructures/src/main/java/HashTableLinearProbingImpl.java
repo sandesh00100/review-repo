@@ -48,7 +48,7 @@ public class HashTableLinearProbingImpl<K, V> implements HashTable<K,V>{
     @Override
     public V get(K k) {
         for (int i = getIndex(k); keys[i] != null; i = (i+1) % size){
-            if (keys.equals(keys[i])){
+            if (k.equals(keys[i])){
                 return vals[i];
             }
         }
@@ -58,7 +58,7 @@ public class HashTableLinearProbingImpl<K, V> implements HashTable<K,V>{
     @Override
     public V remove(K k) {
         for (int i = getIndex(k); keys[i] != null; i = (i+1) % size){
-            if (keys.equals(keys[i])){
+            if (k.equals(keys[i])){
                 V removedVal = vals[i];
                 vals[i] = null;
                 keys[i] = null;

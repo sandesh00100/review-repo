@@ -33,7 +33,7 @@ public class HashTableSeperateChainingImpl<K, V> implements HashTable<K, V> {
 	
 	public HashTableSeperateChainingImpl() {
 		buckets = new ArrayList<HashNode<K,V>>();
-		numBuckets = 10;
+		numBuckets = 2;
 		size = 0;
 		
 		for (int i = 0; i < numBuckets; i++) {
@@ -64,6 +64,7 @@ public class HashTableSeperateChainingImpl<K, V> implements HashTable<K, V> {
 			if (currentNode.key.equals(key)) {
 				return currentNode.value;
 			}
+			currentNode = currentNode.next;
 		}
 		
 		return null;
@@ -77,12 +78,12 @@ public class HashTableSeperateChainingImpl<K, V> implements HashTable<K, V> {
 		
 		while(currentNode != null) {
 			if (currentNode.key.equals(key)) {
-				if (currentNode.next != null) {
-					currentNode = currentNode.next;
-				}
-				val = currentNode.value;
 				size--;
+				val = currentNode.value;
+				buckets.remove(bucketIndex);
+				break;
 			}
+			currentNode = currentNode.next;
 		}
 		
 		return val;
@@ -94,7 +95,9 @@ public class HashTableSeperateChainingImpl<K, V> implements HashTable<K, V> {
 		int bucketIndex = getBucketIndex(key);
 		HashNode<K,V> currentNode = buckets.get(bucketIndex);
 		if (currentNode == null) {
+			currentNode = new HashNode<>(key,value);
 			buckets.set(bucketIndex, currentNode);
+			return;
 		}
 
 		// Seperate chaining method
