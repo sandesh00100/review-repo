@@ -25,6 +25,28 @@ public class QuickSort {
     return j;
     }
 
+    public static void threeWayQuickSort(int[] a, int lo, int hi){
+       if (hi <= lo) return;
+       int lt = lo, gt = hi;
+       int i = lo;
+       while (i <= gt){
+           if (a[i] < a[lo]){
+               lt++;
+               i++;
+               int temp = a[lt];
+               a[lt] = a[i];
+               a[i] = temp;
+           }else if(a[i] > a[lo]){
+               gt--;
+               int temp = a[gt];
+               a[gt] = a[i];
+               a[i] = temp;
+           }
+       }
+       threeWayQuickSort(a,lo, lt-1);
+       threeWayQuickSort(a,gt+1, hi);
+    }
+
     public static void sort(int a[]){
         // Random shuffle is important for performance
         Shuffle.shuffle(a);
