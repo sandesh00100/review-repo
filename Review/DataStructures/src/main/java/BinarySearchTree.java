@@ -7,8 +7,8 @@
  * @param <Value>
  */
 public class BinarySearchTree<Key extends Comparable<Key>, Value> {
-    private Node root;
-    private int size = 0;
+    protected Node root;
+    protected int size = 0;
 
     /**
      * Finding the largest key that is less than the key being passed in
@@ -35,7 +35,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
         root = put(root, key, val);
     }
 
-    private Node put(Node curNode, Key key, Value val){
+    protected Node put(Node curNode, Key key, Value val){
         if (curNode == null) {
             size++;
             return new Node(key, val);
@@ -117,7 +117,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
         return size(root);
     }
 
-    private int size(Node node){
+    protected int size(Node node){
         if (node == null) return 0;
         return node.count;
     }
@@ -151,11 +151,11 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
         else return size(node.left);
     }
 
-    private class Node {
-        private Key key;
-        private Value value;
-        private Node left, right;
-        private int count;
+    protected class Node {
+        protected Key key;
+        protected Value value;
+        protected Node left, right;
+        protected int count;
         public Node(Key key, Value value){
             this.key = key;
             this.value = value;

@@ -1,11 +1,12 @@
+import java.awt.*;
+
 public class TwoDimensionalPoint implements Comparable<TwoDimensionalPoint>{
     private int x;
     private int y;
     private PointDirection pointDirection;
-    public TwoDimensionalPoint(int x, int y, PointDirection pointDirection) {
+    public TwoDimensionalPoint(int x, int y) {
         this.x = x;
         this.y = y;
-        this.pointDirection = pointDirection;
     }
 
     public int getY() {
@@ -14,6 +15,10 @@ public class TwoDimensionalPoint implements Comparable<TwoDimensionalPoint>{
 
     public int getX() {
         return x;
+    }
+
+    public void setPointDirection(PointDirection pointDirection){
+       this.pointDirection = pointDirection;
     }
 
     @Override
