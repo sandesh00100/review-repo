@@ -2,7 +2,7 @@ import java.util.*;
 
 public class GraphList implements Graph {
     private HashMap<Integer, GraphNode> nodeLookup = new HashMap<Integer, GraphNode>();
-
+    private int numEdges = 0;
     @Override
     public void addEdge(int source, int destination) {
         GraphNode s = nodeLookup.get(source);
@@ -26,6 +26,49 @@ public class GraphList implements Graph {
 
         s.adjacentNodes.add(d);
         d.adjacentNodes.add(s);
+        numEdges++:
+    }
+
+    public LinkedList<GraphNode> adj(int vertex){
+        return nodeLookup.get(vertex).adjacentNodes;
+    }
+
+    public int getNumVerticies(){
+        return nodeLookup.size();
+    }
+
+    public int getNumEdges(){
+        return numEdges;
+    }
+
+    public static int degree(GraphList graph, int vertex){
+       return graph.adj(vertex).size();
+    }
+
+    public static int maxDegree(GraphList graph){
+        int max = 0;
+        for (int i = 0; i < graph.getNumVerticies(); i++){
+            if (degree(graph, i) > max) {
+                max = degree(graph, i);
+            }
+        }
+        return max;
+    }
+
+    public static double averageDegree(GraphList graph){
+        return 2.0 * graph.numEdges / graph.getNumVerticies();
+    }
+
+    public static int numberOfSelfLoops(GraphList graph){
+        int count = 0;
+        for (int i = 0; i < graph.getNumVerticies(); i++){
+            for(GraphNode graphNode: graph.adj(i)){
+                if (graphNode.id == i){
+                    count++;
+                }
+            }
+        }
+        return count/2;
     }
 
     @Override

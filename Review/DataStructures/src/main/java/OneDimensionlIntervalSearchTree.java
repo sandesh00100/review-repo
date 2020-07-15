@@ -67,10 +67,7 @@ public class OneDimensionlIntervalSearchTree<Key extends Comparable<Key>, Value>
             if (hiHiCmp <= 0 && hiLoCmp >= 0){
                 return true;
             }
-            if (loHiCmp <= 0 && loLoCmp >= 0){
-                return  true;
-            }
-            return false;
+            return loHiCmp <= 0 && loLoCmp >= 0;
         }
     }
 }
