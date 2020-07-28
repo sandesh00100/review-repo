@@ -1,16 +1,11 @@
 import java.util.*;
 
 public class GraphList implements Graph {
-    private HashMap<Integer, GraphNode> nodeLookup = new HashMap<Integer, GraphNode>();
-    private int numEdges = 0;
+    protected HashMap<Integer, GraphNode> nodeLookup = new HashMap<Integer, GraphNode>();
+    protected int numEdges = 0;
+
     @Override
     public void addEdge(int source, int destination) {
-        GraphNode s = nodeLookup.get(source);
-        GraphNode d = nodeLookup.get(destination);
-        s.adjacentNodes.add(d);
-    }
-
-    public void addEdgeBiDirectional(int source, int destination) {
         GraphNode s = nodeLookup.get(source);
         GraphNode d = nodeLookup.get(destination);
 
@@ -26,7 +21,7 @@ public class GraphList implements Graph {
 
         s.adjacentNodes.add(d);
         d.adjacentNodes.add(s);
-        numEdges++:
+        numEdges++;
     }
 
     public LinkedList<GraphNode> adj(int vertex){
@@ -171,5 +166,9 @@ public class GraphList implements Graph {
             }
         }
         return false;
+    }
+
+    public Map<Integer, GraphNode> getNodeLookup(){
+        return nodeLookup;
     }
 }
